@@ -53,7 +53,7 @@ void inserirFim(int valor) {
     }
 }
 
-void inserirMeio(int valor, int index) {
+void inserirMeio(int index, int valor) {
     int size = length();
 
     if (index < 0 || index > size) {
@@ -94,7 +94,7 @@ int removerInicio() {
     return -1;
 }
 
-int removerFim() {
+int removerFinal() {
     if (head != 0) {
         struct node *prevNode;
         struct node *actualNode = head;
@@ -124,7 +124,7 @@ int removerMeio(int index) {
             if (index == 0) {
                 return removerInicio();
             } else if (index == size - 1) {
-                return removerFim();
+                return removerFinal();
             } else {
                 int valor = 0;
                 struct node *prevNode;
@@ -154,14 +154,25 @@ void reverse() {
 
         while (actualNode != 0) {
             nextNode = nextNode -> next;
-            currentNode -> next = prev;
-            prev = currentNode;
-            currentNode = nextNode;
+            actualNode -> next = prev;
+            prev = actualNode;
+            actualNode = nextNode;
         }
         head = prev;
     }
 }
 
+void imprimirLista() {
+    if (head != 0) {
+        struct node *actualNode = head;
+
+        while (actualNode != 0) {
+            printf("%d ", actualNode -> valor);
+            actualNode = actualNode -> next;
+        }
+        printf("\n");
+    }
+}
 
 void printMenu() {
     printf("1 -> Adicionar elemento no inicio.\n");
